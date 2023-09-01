@@ -18,9 +18,9 @@ public class UserService {
     return (User)jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper(User.class));
   }
 
-  public void deleteUser(int id) {
+  public boolean deleteUser(int id) {
     System.out.println("Deleting user for id: " + id);
     String sql = "DELETE FROM USER WHERE id = " + id;
-    jdbcTemplate.update(sql);
+    return jdbcTemplate.update(sql)==1;
   }
 }
