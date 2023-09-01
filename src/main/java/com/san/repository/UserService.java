@@ -2,6 +2,7 @@ package com.san.repository;
 
 import com.san.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class UserService {
     System.out.println("Getting user for id: " + id);
     String sql = "SELECT * FROM USER WHERE id = " + id;
 
-    return jdbcTemplate.queryForObject(sql, User.class);
+    return (User)jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper(User.class));
   }
 
   public void deleteUser(int id) {
